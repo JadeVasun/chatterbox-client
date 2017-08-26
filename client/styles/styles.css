@@ -20,6 +20,11 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+    text-align: center;
+    border: 10px solid black;
+    line-height: 100px;
+    
+    
 }
 
 #main h1 span {
@@ -188,13 +193,16 @@ form input[type=text] {
     padding: 10px;
     margin: 10px;
     border: 2px solid gray;
-    background: green;
+    background:#7fb77f;;
 }
 
-.main #head {
-    text-align: center;
-    position: absolute;
+input[type="text"] {
+    text-align: left;
+    width: 437px;
+    margin-top: 35px;
 }
+
+
 
 
 
