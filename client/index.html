@@ -17,6 +17,7 @@
         }
         newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
         window.location.search = newSearch;
+        console.log(newSearch);
       }
     </script>
     <!-- your scripts -->
@@ -28,12 +29,12 @@
       <h1>CHATTERBOX</h1>
       <!-- Your HTML goes here! -->
       <div class="msgbar">
-        <input type="text">
+        <input type="text" id="message" placeholder="Your Message Here">
         <button class="submit">Submit</button>
       </div>
     </div>
     
     <div id="chats"></div>
-    <div id="friendlist"><p>FRIEND LIST<p></div>
+    <div class="friendlist"><p>FRIEND LIST<p></div>
   </body>
 </html>

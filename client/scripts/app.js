@@ -4,15 +4,17 @@ $(document).ready(function() {
 });
 var app = {
   Server: "http://parse.la.hackreactor.com/chatterbox/classes/messages",
+  username: window.location.search.split('=')[1] || 'anonmous',
+  roomname: 'lobby',
   init: function () {
   app.fetch();
   },
   send: function (message) {
     $.ajax({
       // This is the url you should use to communicate with the parse API server.
-      url: 'http://parse.CAMPUS.hackreactor.com/chatterbox/classes/messages',
+      url: 'http://parse.la.hackreactor.com/chatterbox/classes/messages',
       type: 'POST',
-      data: message,
+      data: JSON.stringify(message),
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message sent');
@@ -57,7 +59,7 @@ var app = {
     messages.username = _.escape(messages.username);
     messages.text= _.escape(messages.text);
     $('#chats').append(`<div class='message'>
-    <div class='username'><a class=" '+messages.username+' ">${"Username: " + messages.username}</div>
+    <button class='username'>${ messages.username}</button>
     <div class='text'>${"Message: " + messages.text}</div>
     <div class='roomname'>${"Roomname: " + messages.roomname}</div>
 </div>`);
@@ -69,8 +71,21 @@ var app = {
     
   },
   handleSubmit: function () {
-
+    var myMessage = {
+      username: app.username,
+      text: $('#message').val(),
+      roomname: app.roomname,
+    }
+    app.send(myMessage);
   }
 }
+
+$(document).ready(function() {
+  $(".submit").on('click', function (event) {
+  event.preventDefault();
+  alert('submitted successfully');
+  app.handleSubmit()
+  })
+})
 
 
