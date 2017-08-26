@@ -6,9 +6,12 @@ var app = {
   Server: "http://parse.la.hackreactor.com/chatterbox/classes/messages",
   username: window.location.search.split('=')[1] || 'anonmous',
   roomname: 'lobby',
+  friendlist: {},
   init: function () {
   app.fetch();
   },
+
+  
   send: function (message) {
     $.ajax({
       // This is the url you should use to communicate with the parse API server.
@@ -40,9 +43,10 @@ var app = {
             if (element.text !== undefined){
             app.renderMessage(element);
             }
-          });
+          });   
         }
         console.log('chatterbox: Message sent');
+        app.userNameOnClick();
     
       },
       error: function (data) {
@@ -59,16 +63,27 @@ var app = {
     messages.username = _.escape(messages.username);
     messages.text= _.escape(messages.text);
     $('#chats').append(`<div class='message'>
-    <button class='username'>${ messages.username}</button>
-    <div class='text'>${"Message: " + messages.text}</div>
+    <button class= '${ messages.username} username'> ${ messages.username} </button>
+    <div class='text'>${ messages.text}</div>
     <div class='roomname'>${"Roomname: " + messages.roomname}</div>
 </div>`);
   },
+
+  userNameOnClick: function () {
+  $(".username").on('click', function (event) {
+      event.preventDefault();
+      app.handleUsernameClick();
+      console.log(event.classList);
+      console.log('test');
+    })
+  },
+
   renderRoom: function (value) {
     $('#roomSelect').append('<div> ' + value + '</div>');
   },
-  handleUsernameClick: function (data) {
-    
+  handleUsernameClick: function () {
+    $(".friendlist").append('<div>'  + event.target.classList[0]  + '</div>');
+    console.log('test');
   },
   handleSubmit: function () {
     var myMessage = {
@@ -88,4 +103,11 @@ $(document).ready(function() {
   })
 })
 
-
+$(document).ready(function() {
+  //console.log('testing');
+  $(".username").on('click', function (event) {
+    event.preventDefault();
+    app.handleUsernameClick();
+    
+  })
+})
