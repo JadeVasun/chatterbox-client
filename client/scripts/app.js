@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 var app = {
   Server: "http://parse.la.hackreactor.com/chatterbox/classes/messages",
-  username: window.location.search.split('=')[1] || 'anonmous',
+  username: window.location.search.split('=')[1] || 'anonymous',
   roomname: 'lobby',
   friendlist: {},
   init: function () {
@@ -22,6 +22,7 @@ var app = {
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message sent');
+        $('#message').val('');
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -88,8 +89,17 @@ var app = {
 
   renderRoom: function (messages) {
     $('.rooms').append("<option id="+ messages.roomname + "value=" + messages.roomname + ">" + messages.roomname + "</option>")
-    console.log(event);
+   
   },
+
+  addRoom: function () {
+    console.log('testing');
+    $('.rooms').append("<option id="+ $('#roomMessage').val() + "value=" + $('#roomMessage').val() + ">" + $('#roomMessage').val() + "</option>")
+    //console.log($('#roomMessage').val());
+    $('#roomMessage').val('')
+    
+  },
+
   handleUsernameClick: function () {
     $(".friendlist").append('<div>'  + event.target.classList[0]  + '</div>');
     console.log('test');
@@ -125,5 +135,13 @@ $(document).ready(function() {
   $(".rooms").on('change', function (event) {
     event.preventDefault();
     app.renderRoom();
+  })
+})
+
+$(document).ready(function() {
+  $(".newRoom").on('click', function (event) {
+    event.preventDefault();
+    alert('created room successfully');
+    app.addRoom();
   })
 })

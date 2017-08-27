@@ -32,7 +32,13 @@
         <input type="text" id="message" placeholder="Your Message Here">
         <button class="submit">Submit</button>
       </div>
-      <select class="rooms"></select>
+      <div class="msgbar">
+          <input type="text" id="roomMessage" placeholder="Your Roomname Here">
+          <button class="newRoom" id="addRoom">Add Room</button>
+      </div>
+      <select class="rooms">
+        <option value="" disabled selected>Select your room</option>
+      </select>
     </div>
     
     <div id="chats"></div>
