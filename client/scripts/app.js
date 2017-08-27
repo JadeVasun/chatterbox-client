@@ -1,4 +1,5 @@
 // YOUR CODE HERE:
+var checkRoom = [];
 $(document).ready(function() {
   app.init();
 });
@@ -40,8 +41,11 @@ var app = {
         for (var results in data) {
           messages = data[results];
           messages.forEach(function(element) {
-            if (element.roomname !== undefined){
-            app.renderRoom(element);
+            // checkRoom[element.roomname] = element.roomname;
+           
+            if (element.roomname !== undefined && checkRoom.indexOf(element.roomname) === -1) {
+              checkRoom.push(element.roomname)
+              app.renderRoom(element);
             }
             if (element.text !== undefined){
             app.renderMessage(element);
