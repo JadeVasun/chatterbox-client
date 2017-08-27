@@ -40,6 +40,9 @@ var app = {
         for (var results in data) {
           messages = data[results];
           messages.forEach(function(element) {
+            if (element.roomname !== undefined){
+            app.renderRoom(element);
+            }
             if (element.text !== undefined){
             app.renderMessage(element);
             }
@@ -47,6 +50,7 @@ var app = {
         }
         console.log('chatterbox: Message sent');
         app.userNameOnClick();
+        
     
       },
       error: function (data) {
@@ -78,8 +82,9 @@ var app = {
     })
   },
 
-  renderRoom: function (value) {
-    $('#roomSelect').append('<div> ' + value + '</div>');
+  renderRoom: function (messages) {
+    $('.rooms').append("<option id="+ messages.roomname + "value=" + messages.roomname + ">" + messages.roomname + "</option>")
+    console.log(event);
   },
   handleUsernameClick: function () {
     $(".friendlist").append('<div>'  + event.target.classList[0]  + '</div>');
@@ -109,5 +114,12 @@ $(document).ready(function() {
     event.preventDefault();
     app.handleUsernameClick();
     
+  })
+})
+
+$(document).ready(function() {
+  $(".rooms").on('change', function (event) {
+    event.preventDefault();
+    app.renderRoom();
   })
 })
